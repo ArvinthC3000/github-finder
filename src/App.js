@@ -1,12 +1,18 @@
 
-import React from 'react';
+import React, { Component } from 'react';
 import './App.css';
 
-class App extends React.Component{
+class App extends Component{
   render(){
+    
+    const name = "Arvinth";
+    const loading = false;
+    const showName = true
+
+
     return (
       <div className="App">
-        <h1>Hello from React server</h1>
+        {loading? <h2>Loading...</h2> : <h1>Hello {showName && name}</h1>}
       </div>
     );
   }
