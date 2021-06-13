@@ -15,6 +15,7 @@ class App extends Component {
   state = {
     users: [],
     user: {},
+    repos: [],
     loading: false,
     alert: null,
   };
@@ -28,7 +29,7 @@ class App extends Component {
   // }
 
   /* Search github users and set state */
-  searchUsers = async (text) => {
+  searchUsers = async text => {
     if (!text) return this.setState({ users: [] });
 
     this.setState({ loading: true, alert: null });
@@ -38,12 +39,22 @@ class App extends Component {
     this.setState({ users: res.data.items, loading: false });
   };
 
-  getUser = async (username) => {
+  /* Get users */
+  getUser = async username => {
     this.setState({ loading: true, alert: null });
     const res = await axios.get(
       `https://api.github.com/users/${username}?&client_id=${process.env.REACT_APP_GITHUB_CLIENT_ID}&client_secret=${process.env.REACT_APP_GITHUB_CLIENT_SECRET}`
     );
     this.setState({ user: res.data, loading: false });
+  };
+
+  /* Get users repo */
+  getUserRepos = async username => {
+    this.setState({ loading: true, alert: null });
+    const res = await axios.get(
+      `https://api.github.com/users/${username}/repos?per_page=5&sort=created:asc&client_id=${process.env.REACT_APP_GITHUB_CLIENT_ID}&client_secret=${process.env.REACT_APP_GITHUB_CLIENT_SECRET}`
+    );
+    this.setState({ repos: res.data, loading: false });
   };
 
   /* Clear users form state */
@@ -55,7 +66,7 @@ class App extends Component {
   };
 
   render() {
-    const { alert, loading, user, users } = this.state;
+    const { alert, loading, user, users, repos } = this.state;
     return (
       <Router>
         <div className='App'>
@@ -66,7 +77,7 @@ class App extends Component {
               <Route
                 exact
                 path='/'
-                render={(props) => (
+                render={props => (
                   <>
                     <Search
                       searchUsers={this.searchUsers}
@@ -82,12 +93,14 @@ class App extends Component {
               <Route
                 exact
                 path='/user/:login'
-                render={(props) => (
+                render={props => (
                   <User
                     {...props}
                     user={user}
                     getUser={this.getUser}
+                    getUserRepos={this.getUserRepos}
                     loading={loading}
+                    repos={repos}
                   />
                 )}
               />
