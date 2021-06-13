@@ -18,9 +18,10 @@ const Users = () => {
 };
 
 const userStyle = {
-  display: 'grid',
-  gridTemplateColumns: 'repeat(3, 1fr)',
+  display: 'flex',
+  flexWrap: 'wrap',
   gridGap: '1rem',
+  justifyContent: 'space-around',
 };
 
 export default Users;
