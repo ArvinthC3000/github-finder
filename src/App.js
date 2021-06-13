@@ -1,12 +1,14 @@
-import React, { Component } from 'react';
 import './App.css';
-import axios from 'axios';
 
-import NavBar from './components/layout/NavBar';
-import Alert from './components/layout/Alert';
-import Users from './components/users/Users';
-import Search from './components/users/Search';
+import axios from 'axios';
+import React, { Component } from 'react';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+
+import Alert from './components/layout/Alert';
+import NavBar from './components/layout/NavBar';
+import Search from './components/users/Search';
+import Users from './components/users/Users';
+import About from 'components/pages/About';
 
 class App extends Component {
   state = {
@@ -68,6 +70,7 @@ class App extends Component {
                   </>
                 )}
               />
+              <Route exact path='/about' component={About} />
             </Switch>
           </div>
         </div>
