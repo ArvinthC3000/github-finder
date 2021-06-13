@@ -6,6 +6,7 @@ import NavBar from './components/layout/NavBar';
 import Alert from './components/layout/Alert';
 import Users from './components/users/Users';
 import Search from './components/users/Search';
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 
 class App extends Component {
   state = {
@@ -43,19 +44,34 @@ class App extends Component {
 
   render() {
     return (
-      <div className='App'>
-        <NavBar title='Github Finder' />
-        <div className='container'>
-          <Alert alert={this.state.alert} />
-          <Search
-            searchUsers={this.searchUsers}
-            clearUser={this.clearUser}
-            showClear={!!this.state.users.length}
-            showAlert={this.showAlert}
-          />
-          <Users loading={this.state.loading} users={this.state.users} />
+      <Router>
+        <div className='App'>
+          <NavBar title='Github Finder' />
+          <div className='container'>
+            <Alert alert={this.state.alert} />
+            <Switch>
+              <Route
+                exact
+                path='/'
+                render={(props) => (
+                  <>
+                    <Search
+                      searchUsers={this.searchUsers}
+                      clearUser={this.clearUser}
+                      showClear={!!this.state.users.length}
+                      showAlert={this.showAlert}
+                    />
+                    <Users
+                      loading={this.state.loading}
+                      users={this.state.users}
+                    />
+                  </>
+                )}
+              />
+            </Switch>
+          </div>
         </div>
-      </div>
+      </Router>
     );
   }
 }
