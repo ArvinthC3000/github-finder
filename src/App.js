@@ -15,14 +15,6 @@ import GithubState from './context/github/GithubState';
 const App = () => {
   const [alert, setAlert] = useState(null);
 
-  /* Search github users and set state */
-
-  /* Get users */
-
-  /* Get users repo */
-
-  /* Clear users form state */
-
   /* set Alerts */
   const showAlert = (msg, type) => setAlert({ msg, type });
 
@@ -45,11 +37,7 @@ const App = () => {
                 )}
               />
               <Route exact path='/about' component={About} />
-              <Route
-                exact
-                path='/user/:login'
-                render={props => <User {...props} />}
-              />
+              <Route exact path='/user/:login' component={User} />
             </Switch>
           </div>
         </div>
