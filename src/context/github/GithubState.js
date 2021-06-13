@@ -20,7 +20,7 @@ const GithubStates = props => {
 
   const [state, dispatch] = useReducer(GithubReducer, initialState);
 
-  // Search Users
+  /* Search github users and set state */
   const searchUsers = async text => {
     setLoading();
     const res = await axios.get(
@@ -35,7 +35,7 @@ const GithubStates = props => {
     });
   };
 
-  // Get User
+  /* Get users */
   const getUser = async username => {
     setLoading();
     const res = await axios.get(
@@ -48,7 +48,7 @@ const GithubStates = props => {
     });
   };
 
-  // Get Repos
+  /* Get users repo */
   const getUserRepos = async username => {
     setLoading();
     const res = await axios.get(
@@ -61,7 +61,7 @@ const GithubStates = props => {
     });
   };
 
-  // Clear Users
+  /* Clear users form state */
   // @ts-ignore
   const clearUser = () => dispatch({ type: CLEAR_USERS });
 
