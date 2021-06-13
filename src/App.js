@@ -1,6 +1,6 @@
 import './App.css';
 
-import React, { useState } from 'react';
+import React from 'react';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 
 import Alert from './components/layout/Alert';
@@ -11,37 +11,35 @@ import User from './components/users/User';
 import About from 'components/pages/About';
 
 import GithubState from './context/github/GithubState';
+import AlertState from './context/alert/AlertState';
 
 const App = () => {
-  const [alert, setAlert] = useState(null);
-
-  /* set Alerts */
-  const showAlert = (msg, type) => setAlert({ msg, type });
-
   return (
     <GithubState>
-      <Router>
-        <div className='App'>
-          <NavBar title='Github Finder' />
-          <div className='container'>
-            <Alert alert={alert} />
-            <Switch>
-              <Route
-                exact
-                path='/'
-                render={props => (
-                  <>
-                    <Search showAlert={showAlert} />
-                    <Users />
-                  </>
-                )}
-              />
-              <Route exact path='/about' component={About} />
-              <Route exact path='/user/:login' component={User} />
-            </Switch>
+      <AlertState>
+        <Router>
+          <div className='App'>
+            <NavBar title='Github Finder' />
+            <div className='container'>
+              <Alert />
+              <Switch>
+                <Route
+                  exact
+                  path='/'
+                  render={props => (
+                    <>
+                      <Search />
+                      <Users />
+                    </>
+                  )}
+                />
+                <Route exact path='/about' component={About} />
+                <Route exact path='/user/:login' component={User} />
+              </Switch>
+            </div>
           </div>
-        </div>
-      </Router>
+        </Router>
+      </AlertState>
     </GithubState>
   );
 };
