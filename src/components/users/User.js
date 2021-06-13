@@ -36,7 +36,7 @@ const User = ({ match }) => {
       <Link to='/' className='btn btn-light'>
         Back to search
       </Link>
-      Hierable:{' '}
+      Hireable:{' '}
       {hireable ? (
         <i className='fas fa-check text-success'></i>
       ) : (
